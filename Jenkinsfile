@@ -12,9 +12,12 @@ pipeline {
         }
         stage('SonarQube Analysis') {
             steps {
-                echo 'Analizando código con SonarQube...'
+                withSonarQubeEnv('sonar-server') {
+                    sh 'mvn sonar:sonar'
+                }
             }
         }
+
         stage('Nexus Upload') {
             steps {
                 echo 'Subiendo archivo .jar a Nexus...'

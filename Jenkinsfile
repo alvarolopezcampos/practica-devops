@@ -29,7 +29,12 @@ pipeline {
 
         stage('Nexus Upload') {
             steps {
-                echo 'Subiendo archivo .jar a Nexus...'
+                withCredentials([usernamePassword(credentialsId: 'nexus-credentials', passwordVariable: 'NEXUS_PWD', usernameVariable: 'NEXUS_USR')]) {
+                    sh '''
+                    echo "<settings><servers><server><id>nexus-snapshots</id><username>${NEXUS_USR}</username><password>${NEXUS_PWD}</password></server></servers></settings>" > settings.xml
+                    mvn deploy -s settings.xml -DskipTests
+                    '''
+                }
             }
         }
         stage('Docker Build') {

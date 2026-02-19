@@ -39,7 +39,7 @@ pipeline {
         }
         stage('Docker Build') {
             steps {
-                echo 'Creando imagen de Docker...'
+                sh 'docker build -t my-app:latest .'
             }
         }
         stage('Deploy') {

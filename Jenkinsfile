@@ -27,8 +27,11 @@ pipeline {
 
         stage('Nexus Upload') {
             steps {
-                echo 'Subiendo el artefacto .jar a Nexus...'
-                sh 'mvn deploy -DskipTests'
+                echo 'Subiendo el archivo .jar a Nexus...'
+                // Sustituye 'nexus-credentials' por el ID exacto que le pusiste a tu credencial en Jenkins
+                withCredentials([usernamePassword(credentialsId: 'nexus-credentials', passwordVariable: 'NEXUS_PASS', usernameVariable: 'NEXUS_USER')]) {
+                    sh "mvn deploy -DskipTests -Dnexus.url=http://nexus:8081 -Dusername=${NEXUS_USER} -Dpassword=${NEXUS_PASS}"
+                }
             }
         }
         stage('Docker Build') {

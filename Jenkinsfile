@@ -27,7 +27,8 @@ pipeline {
 
         stage('Nexus Upload') {
             steps {
-                echo 'Subiendo archivo .jar a Nexus...'
+                echo 'Subiendo el artefacto .jar a Nexus...'
+                sh 'mvn deploy -DskipTests'
             }
         }
         stage('Docker Build') {

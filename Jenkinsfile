@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Compile') {
             steps {
-                echo 'Iniciando la compilación del proyecto...'
+                sh 'mvn clean package'
             }
         }
         stage('SonarQube Analysis') {

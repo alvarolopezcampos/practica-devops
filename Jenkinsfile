@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Compile') {
             steps {
-                echo 'Iniciando la compilación del proyecto...'
+                echo 'mvn clean package'
             }
         }
         stage('SonarQube Analysis') {

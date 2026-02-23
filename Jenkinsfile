@@ -3,15 +3,16 @@ pipeline {
         tools {
         maven 'Maven' 
     }
+    environment {
+    NEXUS_URL = 'http://nexus:8081'
+}
     stages {
         stage('Compilación') {
             steps {
                 sh 'mvn clean package'
             }
         }
-        environment {
-    NEXUS_URL = 'http://nexus:8081'
-}
+        
         stage('SonarQube análisis') {
             steps {
                 withSonarQubeEnv('sonar-server') {

@@ -39,7 +39,7 @@ pipeline {
                     repository: 'maven-snapshots',
                     credentialsId: 'nexus-credential',
                     artifacts: [
-                        [artifactId: 'issuetracking', classifier: '', file: 'target/issuetracking-0.0.1-SNAPSHOT.jar', type: 'jar']
+                        [artifactId: 'issuetracking', file: 'target/issuetracking-0.0.1-SNAPSHOT.jar', type: 'jar']
                     ]
                 )
             }

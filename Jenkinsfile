@@ -4,12 +4,15 @@ pipeline {
         maven 'Maven' 
     }
     stages {
-        stage('Compile') {
+        stage('Compilación') {
             steps {
                 sh 'mvn clean package'
             }
         }
-        stage('SonarQube Analysis') {
+        environment {
+            NEXUS_URL = 'hhtp://nexus:8081'
+        }
+        stage('SonarQube análisis') {
             steps {
                 withSonarQubeEnv('sonar-server') {
                     sh 'mvn sonar:sonar'
@@ -26,6 +29,18 @@ pipeline {
         stage('Nexus Upload') {
             steps {
                 echo 'Subiendo archivo .jar a Nexus...'
+                nexusArtifactUploader(
+                    nexusVersion: 'nexus3',
+                    protocol: 'http',
+                    nexusUrl: 'nexus:8081',
+                    groupId: 'com.ismail',
+                    version: '0.0.1-SNAPSHOT',
+                    repository: 'maven-snapshots',
+                    credentialsId: 'nexus-credential',
+                    artifacts: [
+                        [artifactId: 'issuetracking', classifier: '', file: 'target/issuetracking-0.0.1-SNAPSHOT.jar', type: 'jar']
+                    ]
+                )
             }
         }
         stage('Docker Build') {

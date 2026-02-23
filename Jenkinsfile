@@ -43,7 +43,7 @@ pipeline {
         }
         stage('Docker Build') {
             steps {
-                sh 'docker build -t issuetracking:0.0.1-SNAPSHOT .'
+                sh 'docker build -t issuetracking:0.0.1-SNAPSHOT.jar .'
             }
         }
         stage('Deploy') {

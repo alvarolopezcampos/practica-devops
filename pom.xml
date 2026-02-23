@@ -11,7 +11,7 @@
 <artifactId>issuetracking</artifactId>
 <version>0.0.1-SNAPSHOT</version>
 <name>issuetracking</name>
-<description>Issue Tracking Syestem</despcription>
+<description>Issue Tracking Syestem</description>
 <properties>
 <java.version>1.8</java.version>
 <!--  URL de Nexus (se puede sobreescribir en Jenkins con -Dnexus.url=…)  -->

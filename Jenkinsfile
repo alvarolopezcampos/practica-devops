@@ -10,8 +10,8 @@ pipeline {
             }
         }
         environment {
-            NEXUS_URL = 'hhtp://nexus:8081'
-        }
+    NEXUS_URL = 'http://nexus:8081'
+}
         stage('SonarQube análisis') {
             steps {
                 withSonarQubeEnv('sonar-server') {

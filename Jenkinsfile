@@ -11,7 +11,9 @@ pipeline {
         }
         stage('SonarQube Analysis') {
             steps {
-                echo 'Analizando código con SonarQube...'
+                withSonarQubeEnv('sonar-server') {
+                    sh 'mvn sonar:sonar'
+                }
             }
         }
         stage('Nexus Upload') {

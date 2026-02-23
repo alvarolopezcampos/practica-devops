@@ -1,7 +1,10 @@
 pipeline {
     agent any
         tools {
-        maven 'Maven' 
+        maven 'Maven'
+    environment {
+        NEXUS_URL = 'http://nexus:8081'
+    }
     
     stages {
         stage('Compilación') {

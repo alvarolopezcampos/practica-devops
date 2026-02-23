@@ -43,7 +43,7 @@ pipeline {
         }
         stage('Docker Build') {
             steps {
-                echo 'Creando imagen de Docker...'
+                sh 'docker build -t issuetracking:0.0.1-SNAPSHOT .'
             }
         }
         stage('Deploy') {
